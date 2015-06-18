@@ -1,0 +1,51 @@
+NIEM Code Lists Specification
+
+Version 1.0alpha1
+
+June 18, 2015
+
+NIEM Technical Architecture Committee (NTAC)
+
+Authors
+
+   Webb Roberts, Georgia Tech Research Institute (<webb.roberts@gtri.gatech.edu>), Lead Author
+
+Abstract
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultrices interdum tincidunt. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla ultricies ornare congue. Sed adipiscing elementum magna, vel fringilla orci vulputate ut.
+
+Document Status
+
+   This document is a early draft of what may become a product of the NIEM Technical Architecture Committee (NTAC). This document is not normative.
+
+Table of Contents
+
+   The table of contents is omitted from this edition.
+
+Table of Figures
+
+   The table of figures is omitted from this edition.
+
+1. Introduction
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultrices interdum tincidunt. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla ultricies ornare congue. Sed adipiscing elementum magna, vel fringilla orci vulputate ut.
+
+Appendix A. References
+
+   [RFC2119]: Bradner, S. (1997, March). Key words for use in RFCs to Indicate Requirement Levels. Internet Engineering Task Force. Retrieved from http://www.ietf.org/rfc/rfc2119.txt
+
+   [XML]: Bray, T., Paoli, J., Sperberg-McQueen, C. M., Maler, E., & Yergeau, F. (2008, November 26). Extensible Markup Language (XML) 1.0 (Fifth Edition). The World Wide Web Consortium (W3C). Retrieved from http://www.w3.org/TR/xml/
+
+   [XMLSchema1]: Thompson, H. S., Beech, D., Maloney, M., & Mendelsohn, N. (2004, October 28). XML Schema Part 1: Structures Second Edition. Retrieved from http://www.w3.org/TR/xmlschema-1/.
+
+   [XMLNamespaces]: Bray, T., Hollander, D., Layman, A., Tobin, R., & Thompson, H. S. (2009, December 8). Namespaces in XML 1.0 (Third Edition). W3C. Retrieved from http://www.w3.org/TR/2009/REC-xml-names-20091208/
+
+   [XSLT2]: Kay, M. (2007, January 23). XSL Transformations (XSLT) Version 2.0. W3C. Retrieved from http://www.w3.org/TR/2007/REC-xslt20-20070123/
+
+Appendix B. Index of definitions
+
+   The index of definitions is omitted from this edition.
+
+Appendix C. Index of rules
+
+
