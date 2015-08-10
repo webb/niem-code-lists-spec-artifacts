@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<xs:schema
+    ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/3.0/#ReferenceSchemaDocument"
+    targetNamespace="http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/"
+    version="1"
+    xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
+    xmlns:structures="http://release.niem.gov/niem/structures/3.0/"
+    xmlns:appinfo="http://release.niem.gov/niem/appinfo/3.0/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:annotation>
+    <xs:documentation>Definitions for the use of the NIEM Code Lists Specification, version 1.0, in XML message instances.</xs:documentation>
+  </xs:annotation>
+
+  <xs:attribute name="codeList" type="xs:anyURI">
+    <xs:annotation>
+      <xs:documentation>An identifier for a code list that constrains and defines the simple content of element that owns the attribute.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+
+</xs:schema>

@@ -1,8 +1,8 @@
 NIEM Code Lists Specification
 
-Version 1.0alpha1
+Version 1.0alpha2pre
 
-June 18, 2015
+August 3, 2015
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -30,7 +30,107 @@ Table of Figures
 
    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultrices interdum tincidunt. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla ultricies ornare congue. Sed adipiscing elementum magna, vel fringilla orci vulputate ut.
 
+   Parts of the code lists specification:
+
+      *  Provide conformance targets:
+
+            *  Genericode document
+
+            *  Schema document leveraging Genericode
+
+      *  Provide a profile of a Genericode document for NIEM:
+
+            *  Define the relationship between types of columns and NIEM types
+
+      *  Provide method for identifying Genericode document for a validation pass. Maybe this uses an XML catalog document to resolve the document
+
+      *  Provide for the connection between Genericode documents and NIEM schema documents
+
+            *  Leverage the SIX specification to apply code list constraints on XML messages.
+
+            *  Provide XPath function API that leverages code lists in 
+
+      *  Provide an RDF interpretation of code lists used in NIEM messages.
+
+      *  Provide some common columns for conformant code lists:
+
+            *  Code value
+
+            *  Definition
+
+2. Terminology
+
+2.1. XML terminology
+
+   [Definition: XML document]
+
+      The term "XML document" is as defined by [XML] Section 2, Documents, which states:
+
+         A data object is an XML document if it is well-formed, as defined in this specification. In addition, the XML document is valid if it meets certain further constraints.
+
+2.2. Conformance Targets Attribute Specification terminology
+
+   [CTAS] defines several terms used normatively within this specification.
+
+   [Definition: conformance target]
+
+      The term "conformance target" is as defined by [CTAS], which states:
+
+         A conformance target is a class of artifact, such as an interface, protocol, document, platform, process or service, that is the subject of conformance clauses and normative statements. There may be several conformance targets defined within a specification, and these targets may be diverse so as to reflect different aspects of a specification. For example, a protocol message and a protocol engine may be different conformance targets.
+
+   [Definition: conformance target identifier]
+
+      The term "conformance target identifier" is as defined by [CTAS], which states:
+
+         A conformance target identifier is an internationalized resource identifier that uniquely identifies a conformance target.
+
+   [Definition: effective conformance target identifier]
+
+      The term "effective conformance target identifier" is as defined by [CTAS] Section 4, Semantics and Use, which states:
+
+         An effective conformance target identifier of a conformant document is an internationalized resource identifier reference that occurs in the document's effective conformance targets attribute.
+
+3. Conformance targets
+
+   This document defines multiple [conformance targets]. Each conformance target is defined normatively by this specification. Each conformance target has an associated abbreviation, which is used to identify to which conformance targets a rule applies.
+
+   Table 3-1: Codes representing conformance targets
+
+      Code|Conformance target
+
+      CLD|[code list document]
+
+      CLEXSD|[code list-enabled XML Schema document]
+
+3.1. Code list document
+
+   [Definition: code list document]
+
+      A code list document is a Genericode code list document. It is a [conformance target] of this specification. A code list document MUST conform to all rules of this specification that apply to this conformance target. An [XML document] with an [effective conformance target identifier] of http://reference.niem.gov/niem/specification/code-lists/1.0/#CodeListDocument MUST be a code list document.
+
+3.2. Code list-enabled XML Schema document
+
+   [Definition: code list-enabled XML Schema document]
+
+      A code list-enabled XML Schema document is an XML Schema document that supports the use of [code list documents] for validation and meaning. It is a [conformance target] of this specification. A code list-enabled XML Schema document MUST conform to all rules of this specification that apply to this conformance target. An [XML document] with an [effective conformance target identifier] of MACRO_CT_URI_CLEXSD MUST be a code list-enabled XML Schema document.
+
+4. Rules
+
+Rule 4-1. Code list document is as defined by Genericode
+
+   [Rule 4-1] (CLD)
+
+      A [code list document] must be a code list document as defined by [Genericode] Section 3.2, Gericode Document Types, which states:
+
+         A code list document has the root element <gc:CodeList>. It contains metadata describing the code list as a whole, as well as explicit code list data -- codes and associated values.
+
+   [Genericode] defines the namespace prefix "gc" to refer to the namespace "http://docs.oasis-open.org/codelist/ns/genericode/1.0/" 
+
 Appendix A. References
+
+   [CTAS]: Roberts, Webb. "NIEM Conformance Targets Attribute Specification, Version 3.0." NIEM Technical Architecture Committee, July 31, 2014. http://reference.niem.gov/niem/specification/conformance-targets-attribute/3.0/NIEM-CTAS-3.0-2014-07-31.html.
+
+   [Genericode]: Anthony B. Coates, ed. "Code List Representation (Genericode) Version 1.0, Committee Specification." OASIS, December 28, 2007. http://docs.oasis-open.org/codelist/cs-genericode-1.0/doc/oasis-code-list-representation-genericode.html.
 
    [RFC2119]: Bradner, S. (1997, March). Key words for use in RFCs to Indicate Requirement Levels. Internet Engineering Task Force. Retrieved from http://www.ietf.org/rfc/rfc2119.txt
 
@@ -42,10 +142,38 @@ Appendix A. References
 
    [XSLT2]: Kay, M. (2007, January 23). XSL Transformations (XSLT) Version 2.0. W3C. Retrieved from http://www.w3.org/TR/2007/REC-xslt20-20070123/
 
-Appendix B. Index of definitions
+Appendix B. Schema for code list namespace
+
+   The following XML Schema document defines a code list namespace, for use in exchange specifications to express run-time schema semantics.
+
+   <?xml version="1.0" encoding="us-ascii"?>
+   <xs:schema
+       ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/3.0/#ReferenceSchemaDocument"
+       targetNamespace="http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/"
+       version="1"
+       xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
+       xmlns:structures="http://release.niem.gov/niem/structures/3.0/"
+       xmlns:appinfo="http://release.niem.gov/niem/appinfo/3.0/"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   
+     <xs:annotation>
+       <xs:documentation>Definitions for the use of the NIEM Code Lists Specification, version 1.0, in XML message instances.</xs:documentation>
+     </xs:annotation>
+   
+     <xs:attribute name="codeList" type="xs:anyURI">
+       <xs:annotation>
+         <xs:documentation>An identifier for a code list that constrains and defines the simple content of element that owns the attribute.</xs:documentation>
+       </xs:annotation>
+     </xs:attribute>
+   
+   </xs:schema>
+   
+
+Appendix C. Index of definitions
 
    The index of definitions is omitted from this edition.
 
-Appendix C. Index of rules
+Appendix D. Index of rules
 
+   Rule 4-1, Code list document is as defined by Genericode: Section 4, Rules
 
