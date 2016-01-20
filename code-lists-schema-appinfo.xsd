@@ -15,7 +15,8 @@
     </xs:annotation>
     <xs:complexType>
       <xs:attribute name="codeListURI" type="xs:anyURI" use="required"/>
-      <xs:attribute name="columnID" type="xs:NCName" use="optional"/>
+      <xs:attribute name="columnID" type="xs:string" use="optional"/>
+      <xs:attribute name="constraining" type="xs:boolean" use="optional"/>
     </xs:complexType>
   </xs:element>
 
@@ -27,12 +28,13 @@
       <xs:sequence>
         <xs:element name="ElementCodeListBinding" form="qualified" maxOccurs="unbounded">
           <xs:complexType>
-            <xs:attribute name="elementName" type="xs:QName"/>
-            <xs:attribute name="columnID" type="xs:NCName"/>
+            <xs:attribute name="elementName" type="xs:QName" use="required"/>
+            <xs:attribute name="columnID" type="xs:string" use="required"/>
           </xs:complexType>
         </xs:element>
       </xs:sequence>
       <xs:attribute name="codeListURI" type="xs:anyURI" use="required"/>
+      <xs:attribute name="constraining" type="xs:boolean" use="optional"/>
     </xs:complexType>
   </xs:element>
 

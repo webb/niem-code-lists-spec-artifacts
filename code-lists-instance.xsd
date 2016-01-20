@@ -21,9 +21,15 @@
     </xs:annotation>
   </xs:attribute>
 
-  <xs:attribute name="codeListColumnID" type="xs:NCName">
+  <xs:attribute name="codeListColumnID" type="xs:string">
     <xs:annotation>
       <xs:documentation>A local identifier for a code list column within a code list.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+
+  <xs:attribute name="codeListConstrainingIndicator" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation>True when a code list binding constrains the validity of a code list value, false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:attribute>
 
@@ -36,6 +42,7 @@
         <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
         <xs:attribute ref="cli:codeListURI" use="required"/>
         <xs:attribute ref="cli:codeListColumnID" use="optional"/>
+        <xs:attribute ref="cli:codeListConstrainingIndicator" use="optional"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
