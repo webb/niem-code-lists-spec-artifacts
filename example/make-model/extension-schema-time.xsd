@@ -26,9 +26,9 @@
         <clsa:ComplexCodeListBinding
             codeListURI="http://example.org/code-list/vehicle-make-model">
           <clsa:ElementCodeListBinding elementName="nc:VehicleMake"
-                                       columnID="make"/>
+                                       columnName="make"/>
           <clsa:ElementCodeListBinding elementName="nc:VehicleModel"
-                                       columnID="model"/>
+                                       columnName="model"/>
         </clsa:ComplexCodeListBinding>
       </xs:appinfo>
     </xs:annotation>
@@ -41,7 +41,7 @@
       <xs:appinfo>
         <clsa:SimpleCodeListBinding
             codeListURI="http://example.org/code-list/vehicle-make-model"
-            columnID="make"/>
+            columnName="make"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -53,7 +53,7 @@
       <xs:appinfo>
         <clsa:SimpleCodeListBinding
             codeListURI="http://example.org/code-list/vehicle-make-model"
-            columnID="model"/>
+            columnName="model"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>

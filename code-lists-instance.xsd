@@ -21,9 +21,9 @@
     </xs:annotation>
   </xs:attribute>
 
-  <xs:attribute name="codeListColumnID" type="xs:string">
+  <xs:attribute name="codeListColumnName" type="xs:string">
     <xs:annotation>
-      <xs:documentation>A local identifier for a code list column within a code list.</xs:documentation>
+      <xs:documentation>A local name for a code list column within a code list.</xs:documentation>
     </xs:annotation>
   </xs:attribute>
 
@@ -41,7 +41,7 @@
       <xs:extension base="xs:token">
         <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
         <xs:attribute ref="cli:codeListURI" use="required"/>
-        <xs:attribute ref="cli:codeListColumnID" use="optional"/>
+        <xs:attribute ref="cli:codeListColumnName" use="optional"/>
         <xs:attribute ref="cli:codeListConstrainingIndicator" use="optional"/>
       </xs:extension>
     </xs:simpleContent>

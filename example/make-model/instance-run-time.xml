@@ -5,10 +5,10 @@
     xmlns:nc="http://release.niem.gov/niem/niem-core/3.0/">
   <ext:VehicleMakeCode
       cli:codeListURI="http://example.org/code-list/vehicle-make-model"
-      cli:codeListColumnID="make"
+      cli:codeListColumnName="make"
     >DODG</ext:VehicleMakeCode>
   <ext:VehicleModelCode
       cli:codeListURI="http://example.org/code-list/vehicle-make-model"
-      cli:codeListColumnID="model"
+      cli:codeListColumnName="model"
     >R15</ext:VehicleModelCode>
 </nc:Vehicle>

@@ -4,7 +4,7 @@
   <uri name="http://example.org/namespace/extension-run-time"
        uri="extension-run-time.xsd"/>
   <uri name="http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/"
-       uri="code-lists-instance.xsd"/>
+       uri="../../code-lists-instance.xsd"/>
   <uri name="http://example.org/code-list/vehicle-make-model"
        uri="make-model.gc"/>
   <nextCatalog catalog="niem-subset/xml-catalog.xml"/>
