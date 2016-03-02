@@ -14,9 +14,21 @@
       <xs:documentation>An element for connecting simple content defined by an XML Schema component to a a column of a code list.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
-      <xs:attribute name="codeListURI" type="xs:anyURI" use="required"/>
-      <xs:attribute name="columnName" type="xs:string" use="optional"/>
-      <xs:attribute name="constraining" type="xs:boolean" use="optional"/>
+      <xs:attribute name="codeListURI" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation>A universal identifier for a code list.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="columnName" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation>A local name for a code list column within a code list.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="constrainingIndicator" type="xs:boolean" use="optional">
+        <xs:annotation>
+          <xs:documentation>True when a code list binding constrains the validity of a code list value, false otherwise.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
 
@@ -28,13 +40,29 @@
       <xs:sequence>
         <xs:element name="ElementCodeListBinding" form="qualified" maxOccurs="unbounded">
           <xs:complexType>
-            <xs:attribute name="elementName" type="xs:QName" use="required"/>
-            <xs:attribute name="columnName" type="xs:string" use="required"/>
+            <xs:attribute name="elementName" type="xs:QName" use="required">
+              <xs:annotation>
+                <xs:documentation>A qualified name of an XML element.</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="columnName" type="xs:string" use="required">
+              <xs:annotation>
+                <xs:documentation>A local name for a code list column within a code list.</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
           </xs:complexType>
         </xs:element>
       </xs:sequence>
-      <xs:attribute name="codeListURI" type="xs:anyURI" use="required"/>
-      <xs:attribute name="constraining" type="xs:boolean" use="optional"/>
+      <xs:attribute name="codeListURI" type="xs:anyURI" use="required">
+        <xs:annotation>
+          <xs:documentation>A universal identifier for a code list.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="constrainingIndicator" type="xs:boolean" use="optional">
+        <xs:annotation>
+          <xs:documentation>True when a code list binding constrains the validity of a code list value, false otherwise.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
 
