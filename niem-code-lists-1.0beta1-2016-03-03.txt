@@ -1,8 +1,8 @@
 NIEM Code Lists Specification
 
-Version 1.0alpha6
+Version 1.0beta1
 
-March 1, 2016
+March 3, 2016
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -162,6 +162,8 @@ Table of Tables
       *  The connection is established at run time, rather than at the time the schemas are defined.
 
       *  The connection to code lists is explicit in the XML instance document, rather than being defined in schemas that are not exchanged.
+
+   In addition to the above attributes, the code list instance namespace defines a complex type, cli:CodeType. This is provided for the convenience of developers of information exchange specifications, such as NIEM IEPDs. An element that is of type cli:CodeType will have the above attributes, and can identify code lists at run time. Use of this type is not required. Any schema can define a type that includes the above attributes. The presence of the attributes in exchanged XML documents is what introduces the use of code lists at run time.
 
 1.6. Identifying a code list at schema time
 
@@ -536,6 +538,8 @@ Table of Tables
 
       6. The method of identifying a reference to the well-known column "code" (described in Section 7.1, Column: "code", below).
 
+      7. The method of identifying the data type of a code value, which can be a data type defined by an XML Schema, or empty.
+
    These characteristics are described for Genericode files in Section 6, Genericode code lists, below. They are described for CSV files in Section 5, Comma-separated values (CSV) code lists, below.
 
 3.2. Genericode code list document
@@ -896,11 +900,39 @@ Rule 4-15. Matches and validity for a code list binding
 
    The above rule specifies that code list identifiers are to be resolved to [locally-resolved resources], which are in the [local context] of the entity catalog. This specification does not specify that code list identifiers should be resolved by network fetches of code list resources. Code list identifiers are meant to be treated as identifiers, as names, and not as network locations of resources.
 
-Rule 4-16. Code list identified by candidate code list identifiers
+Rule 4-16. Value comparisons based on types
+
+   Rule 4-15, Matches and validity for a code list binding, above, requires values from an XML document to be compared to values from code lists. Whether values match, and how they compare, is dependent on what kind of data those values are. For example, text values and string values are compared using different methods. This rule establishes that typing of comparisons is based on the types of the values.
+
+   [XPathFunctions] Section 17, Casting provides a set of rules for type casting among XML Schema primitive types.
+
+   [Rule 4-16] (VSET)
+
+      Comparisons between a value $instance-value of a column/value pair and a code value $code-value MUST be conducted as follows:
+
+         1. $instance-value has a data type, $instance-data-type, provided by its XML Schema definition.
+
+         2. $code-value has a data type, $code-data-type, as provided by its code list document as specified for its class of code list document. That data type is either a data type defined by the XML Schema definition language, or is empty.
+
+         3. A data type, $comparison-data-type, is calculated as:
+
+               *  If $code-data-type is empty, then $instance-date-type.
+
+               *  If it exists, the lowest common ancestor of the two data types.
+
+               *  Otherwise, xs:string.
+
+         4. $instance-value and $code-value are cast to $comparison-data-type, in accordance with [XPathFunctions] Section 17, Casting.
+
+         5. Equality comparisons are conducted as appropriate for $comparison-data-type.
+
+         6. Inequality comparisons (e.g., less than, greater than) for ranges are conducted as appropriate for lowest atomic base type of $comparison-data-type.
+
+Rule 4-17. Code list identified by candidate code list identifiers
 
    Each class of code list document specifies how its instances define code list identifiers that may refer to a code list. This rule ensures that code lists are referred to via the correct code list identifier, when it is defined.
 
-   [Rule 4-16] (VSET)
+   [Rule 4-17] (VSET)
 
       When a [code list document] defines candidate [code list identifiers], a [code list identifier] against which a [code list document] [resource] is [resolved] MUST be a candidate code list identifier for that code list document.
 
@@ -955,6 +987,8 @@ Rule 5-5. CSV file as a code list document
                *  a column with [CSV column name] of "code", or
 
                *  the first [column] of the [CSV file].
+
+         7. a [code value] in a [CSV file] has no type; its data type is empty.
 
 6. Genericode code lists
 
@@ -1027,6 +1061,8 @@ Rule 6-6. Genericode file as a code list document
                *  the column in the first single-column key for the code list, or
 
                *  the first column in the code list.
+
+         7. A [code value] in a Genericode file has a type as specified by the data definition of its column. If the Type attribute references an element declaration, then the type is the type of that element. If a Parameter, which introduces gc:DatatypeFacet, is used, then the type is treated as an anonymous type derived from the type of the column. A value for which no data type is specified has an empty data type.
 
 7. Well-known columns for NIEM code lists
 
@@ -1162,19 +1198,21 @@ Appendix A. References
 
    [RFC4180]: Shafranovich, Y. "Common Format and MIME Type for Comma-Separated Values (CSV) Files, RFC 4180." IETF Network Working Group, October 2005. http://www.ietf.org/rfc/rfc4180.txt. 
 
+   [XPathFunctions]: Malhotra, Ashok, Jim Melton, Norman Walsh, and Michael Kay. "XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)." W3C, December 14, 2010. https://www.w3.org/TR/xpath-functions/.
+
    [XML]: Bray, T., Paoli, J., Sperberg-McQueen, C. M., Maler, E., & Yergeau, F. (2008, November 26). Extensible Markup Language (XML) 1.0 (Fifth Edition). The World Wide Web Consortium (W3C). Retrieved from http://www.w3.org/TR/2008/REC-xml-20081126/
 
    [XML Catalogs]: Walsh, Norman. "XML Catalogs--OASIS Standard V1.1, 7 October 2005." OASIS Open, Inc., October 7, 2005. https://www.oasis-open.org/committees/download.php/14809/std-entity-xml-catalogs-1.1.html.
 
    [XML Infoset]: Cowan, John, and Richard Tobin. "XML Information Set (Second Edition)", 4 February 2004. http://www.w3.org/TR/2004/REC-xml-infoset-20040204/.
 
-   [XMLSchema1]: Thompson, H. S., Beech, D., Maloney, M., & Mendelsohn, N. (2004, October 28). XML Schema Part 1: Structures Second Edition. Retrieved from http://www.w3.org/TR/2004/REC-xmlschema-1-20041028/.
-
-   [XMLSchema2]: Biron, Paul V., and Ashok Malhotra. "XML Schema Part 2: Datatypes Second Edition," October 28, 2004. http://www.w3.org/TR/2004/REC-xmlschema-2-20041028/.
-
    [XMLNamespaces]: Bray, T., Hollander, D., Layman, A., Tobin, R., & Thompson, H. S. (2009, December 8). Namespaces in XML 1.0 (Third Edition). W3C. Retrieved from http://www.w3.org/TR/2009/REC-xml-names-20091208/
 
    [XML Namespaces Errata]: "Namespaces in XML Errata", 6 December 2002. Available from http://www.w3.org/XML/xml-names-19990114-errata.
+
+   [XMLSchema1]: Thompson, H. S., Beech, D., Maloney, M., & Mendelsohn, N. (2004, October 28). XML Schema Part 1: Structures Second Edition. Retrieved from http://www.w3.org/TR/2004/REC-xmlschema-1-20041028/.
+
+   [XMLSchema2]: Biron, Paul V., and Ashok Malhotra. "XML Schema Part 2: Datatypes Second Edition," October 28, 2004. http://www.w3.org/TR/2004/REC-xmlschema-2-20041028/.
 
    [XSLT2]: Kay, M. (2007, January 23). XSL Transformations (XSLT) Version 2.0. W3C. Retrieved from http://www.w3.org/TR/2007/REC-xslt20-20070123/
 
@@ -1821,7 +1859,8 @@ Appendix G. Index of rules
    Rule 4-13, Element declaration effective complex binding: Section 4.5.3, Complex binding of schema components
    Rule 4-14, Complex type definition effective complex binding: Section 4.5.3, Complex binding of schema components
    Rule 4-15, Matches and validity for a code list binding: Section 4.6, Matches for code list bindings
-   Rule 4-16, Code list identified by candidate code list identifiers: Section 4.6, Matches for code list bindings
+   Rule 4-16, Value comparisons based on types: Section 4.6, Matches for code list bindings
+   Rule 4-17, Code list identified by candidate code list identifiers: Section 4.6, Matches for code list bindings
    Rule 5-1, CSV code list document is a CSV file: Section 5, Comma-separated values (CSV) code lists
    Rule 5-2, CSV code list document has header: Section 5, Comma-separated values (CSV) code lists
    Rule 5-3, CSV column name is not empty: Section 5, Comma-separated values (CSV) code lists
