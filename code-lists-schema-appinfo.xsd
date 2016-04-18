@@ -45,7 +45,7 @@
                 <xs:documentation>A qualified name of an XML element.</xs:documentation>
               </xs:annotation>
             </xs:attribute>
-            <xs:attribute name="columnName" type="xs:string" use="required">
+            <xs:attribute name="columnName" type="xs:string" use="optional">
               <xs:annotation>
                 <xs:documentation>A local name for a code list column within a code list.</xs:documentation>
               </xs:annotation>

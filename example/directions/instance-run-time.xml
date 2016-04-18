@@ -7,7 +7,7 @@
   <m:PositionHeadingMeasure>
     <ext:DegreeAngleValue
        cli:codeListURI="http://example.org/code-lists/example/directions/code-list/1"
-       cli:codeListColumnName="range">122.31</ext:DegreeAngleValue>
+       cli:codeListColumnName="#range">122.31</ext:DegreeAngleValue>
     <m:AngleUnitText>deg</m:AngleUnitText>
   </m:PositionHeadingMeasure>
 </m:Position>
