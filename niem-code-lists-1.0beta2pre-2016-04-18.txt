@@ -1,8 +1,8 @@
 NIEM Code Lists Specification
 
-Version 1.0beta1
+Version 1.0beta2pre
 
-March 15, 2016
+April 18, 2016
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -1438,19 +1438,19 @@ Appendix D.3. Make-Model code list Genericode file
       </Identification>
       <ColumnSet>
          <Column Id="make" Use="required">
-            <ShortName>Make code</ShortName>
+            <ShortName>Make-code</ShortName>
             <Data Type="token"/>
          </Column>
          <Column Id="make-descr" Use="required">
-            <ShortName>Make description</ShortName>
+            <ShortName>Make-description</ShortName>
             <Data Type="string"/>
          </Column>
          <Column Id="model" Use="required">
-            <ShortName>Model code</ShortName>
+            <ShortName>Model-code</ShortName>
             <Data Type="token"/>
          </Column>
          <Column Id="model-descr" Use="required">
-            <ShortName>Mode description</ShortName>
+            <ShortName>Model-description</ShortName>
             <Data Type="string"/>
          </Column>
          <Column Id="class" Use="required">
