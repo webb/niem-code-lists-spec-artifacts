@@ -1,8 +1,8 @@
 NIEM Code Lists Specification
 
-Version 1.0beta2pre
+Version 1.0beta2
 
-April 18, 2016
+May 11, 2016
 
 NIEM Technical Architecture Committee (NTAC)
 
