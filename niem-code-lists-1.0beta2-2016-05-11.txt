@@ -130,7 +130,7 @@ Table of Tables
 
       *  Attribute cli:codeListURI: Carries an [absolute URI] that acts as a [code list identifier]. It identifies a code list to which the value belongs.
 
-      *  Attribute cli:codeListColumnName: Carries an xs:string that holds the name of a column within the code list. The value of the element corresponds to a value in the identified column. This attribute may be optional; if it does not appear, the binding defaults to "code", referencing the well-known column "code" or another column, as identified by the specification for the class of code list document.
+      *  Attribute cli:codeListColumnName: Carries an xs:string that holds the name of a column within the code list, or a well-known column reference. The value of the element corresponds to a value in the identified column. This attribute may be optional; if it does not appear, the binding defaults to "#code", which is resolved to a code column, as specified for the class of code list document.
 
       *  Attribute cli:codeListConstrainingIndicator: carries an xs:boolean that indicates whether the binding to the code list defines a constraint on the validity of the message. This attribute is optional; if it does not appear, then the binding constrains message validity. Values are:
 
@@ -175,7 +175,7 @@ Table of Tables
 
             *  Attribute codeListURI identifies the code list.
 
-            *  Attribute columnName identifies the code list column.
+            *  Attribute columnName identifies the code list column, or a well-known column reference.
 
             *  Attribute constrainingIndicator indicates whether the existence (or absence) of a value in a code list impacts validity of the instance XML document.
 
@@ -189,7 +189,7 @@ Table of Tables
 
                   *  Attribute elementName provides the name of an element whose value is connected to a code list.
 
-                  *  Attribute columnName provides the name of a column of the code list.
+                  *  Attribute columnName provides the name of a column of the code list, or a well-known column reference.
 
    Figure 1-2, XML instance using schema-time code list binding, below, shows an instance that uses schema-time binding. The instance does not carry any information about code lists; it does not have a code list identifier, nor does it have a column name. The instance is simple.
 
@@ -446,7 +446,7 @@ Table of Tables
 
       A code list identifier is an [absolute URI] that identifies a [code list].
 
-   This document defines two ways to refer to a column of a code list, the [column identifier] and the [column name].
+   This document defines two designators for a column of a code list, the [column identifier] and the [column name].
 
    [Definition: column identifier]
 
@@ -536,9 +536,9 @@ Table of Tables
 
       4. The mapping between features of the resource and [column names].
 
-      5. The method of identifying a column as being a well-known column (described in Section 7, Well-known columns for NIEM code lists, below).
+      5. The method of identifying a column as being a well-known column (described in Section 7, Well-known columns and references, below).
 
-      6. The method of identifying a reference to the well-known column "code" (described in Section 7.1, Column: "code", below).
+      6. The method of identifying well-known column reference "#code" (described in Section 7, Well-known columns and references, below).
 
       7. The method of identifying the data type of a code value, which can be a data type defined by an XML Schema, or empty.
 
@@ -650,7 +650,7 @@ Rule 3-2. Document with conformance target is a code list-enabled schema documen
 
          *  a set of column/value pairs, each having:
 
-               *  a [column name], and
+               *  a column reference: either a [column name] or a well-known column reference, and
 
                *  a data value
 
@@ -692,7 +692,7 @@ Rule 4-4. Effective run-time binding.
 
          *  a single column/value pair, having:
 
-               *  a [column name] of: if $element has attribute cli:codeListColumnName, then the [normalized value] of that attribute, otherwise, "code"
+               *  a column reference of: if $element has attribute cli:codeListColumnName, then the [normalized value] of that attribute, else "#code".
 
                *  a data value that is the [normalized value] of $element.
 
@@ -760,7 +760,7 @@ Rule 4-10. Attribute declaration effective simple binding
 
                *  A column/value pair with:
 
-                     *  A [column name] of: if $binding-element has attribute columnName, then the [normalized value] of that attribute, else "code".
+                     *  A column reference of: if $binding-element has attribute columnName, then the [normalized value] of that attribute, else "#code".
 
                      *  A data value that is the [normalized value] of $attribute
 
@@ -778,7 +778,7 @@ Rule 4-11. Element declaration effective simple binding
 
                *  A column/value pair with:
 
-                     *  A [column name] of: if $binding-element has attribute columnName, then the [normalized value] of that attribute, else "code".
+                     *  A column reference of: if $binding-element has attribute columnName, then the [normalized value] of that attribute, else "#code".
 
                      *  A data value that is the [normalized value] of $element
 
@@ -796,7 +796,7 @@ Rule 4-12. Type definition effective simple binding
 
                *  A column/value pair with:
 
-                     *  A [column name] of: if $binding-element has attribute columnName, then the [normalized value] of that attribute, else "code".
+                     *  A column reference of: if $binding-element has attribute columnName, then the [normalized value] of that attribute, else "#code".
 
                      *  A data value that is the [normalized value] of $attribute
 
@@ -808,7 +808,7 @@ Rule 4-12. Type definition effective simple binding
 
                *  A column/value pair with:
 
-                     *  A [column name] of: if $binding-element has attribute columnName, then the [normalized value] of that attribute, else "code".
+                     *  A column reference of: if $binding-element has attribute columnName, then the [normalized value] of that attribute, else "#code".
 
                      *  A data value that is the [normalized value] of $element
 
@@ -830,7 +830,7 @@ Rule 4-13. Element declaration effective complex binding
 
                      *  A column/value pair with:
 
-                           *  A [column name] of the value of attribute columnName of $element-binding.
+                           *  A column reference of: if $element-binding has attribute columnName, then the [normalized value] of that attribute, else "#code".
 
                            *  A data value that is: if it exists, the first element child of $element that is in the [substitution group] of an [element declaration] with a name that is equal to the value of attribute elementName of $element-binding, otherwise empty.
 
@@ -850,7 +850,7 @@ Rule 4-14. Complex type definition effective complex binding
 
                      *  A column/value pair with:
 
-                           *  A [column name] of the value of attribute columnName of $element-binding.
+                           *  A column reference of: if $element-binding has attribute columnName, then the [normalized value] of that attribute, else "#code".
 
                            *  A data value that is: if it exists, the first element child of $element that is in the [substitution group] of an [element declaration] with a name that is equal to the value of attribute elementName of $element-binding, otherwise empty.
 
@@ -876,9 +876,9 @@ Rule 4-15. Matches and validity for a code list binding
 
          *  If $resource is a [code list document], then the set of matches for $binding is the list of distinct entries in the code list for which every column referenced by $binding has the corresponding value.
 
-               *  A column/value pair in $binding with a [column name] of "code" matches as specified for the appropriate class of [code list document] for that [column name].
+               *  A column/value pair in $binding with a column reference of "#code" matches as specified for the appropriate class of [code list document] for that [column name].
 
-               *  A column/value pair in $binding with a [column name] of "range" matches:
+               *  A column/value pair in $binding with a column reference of "#range" matches:
 
                      *  If $resource does not contain a column corresponding to the well-known columns "minimum-inclusive", "minimum-exclusive", "maximum-inclusive", or "maximum-exclusive", then the binding has no matches.
 
@@ -984,7 +984,7 @@ Rule 5-5. CSV file as a code list document
 
          5. A [column] in a [CSV file] is a well-known column when its [CSV column name] is the same as the [column name] of a well-known column.
 
-         6. A reference to [column] "code" is matched, in order, to:
+         6. A reference to [column] "#code" is matched, in order, to:
 
                *  a column with [CSV column name] of "code", or
 
@@ -1054,7 +1054,7 @@ Rule 6-6. Genericode file as a code list document
 
          5. A column in a [Genericode code list document] is a well-known column when its value for CanonicalUri or CanonicalVersionUri corresponds to the [code list identifier] specified for that well-known column.
 
-         6. A reference to [column] "code" is matched, in order, to:
+         6. A reference to [column] "#code" is matched, in order, to:
 
                *  a column corresponding to well-known column "code",
 
@@ -1066,13 +1066,19 @@ Rule 6-6. Genericode file as a code list document
 
          7. A [code value] in a Genericode file has a type as specified by the data definition of its column. If the Type attribute references an element declaration, then the type is the type of that element. If a Parameter, which introduces gc:DatatypeFacet, is used, then the type is treated as an anonymous type derived from the type of the column. A value for which no data type is specified has an empty data type.
 
-7. Well-known columns for NIEM code lists
+7. Well-known columns and references
 
-   This specification defines [column identifiers] and [column name] for several columns that have well-understood semantics. These identifiers and names may be used to define columns in [code list documents] that implement these semantics. These values may be used different ways in different contexts:
+   This specification defines [column identifiers] and [column names] for several columns that have well-understood semantics. These identifiers and names may be used to define columns in [code list documents] that implement these semantics. These values may be used different ways in different contexts:
 
-      *  The column identifier is a URI that a column in a code list document may use to identify a column as being a well-known column. A [Genericode code list document] will use this URI as a CanonicalUri value to indicate that a column is a well-known column.
+      *  The column identifier is an [absolute URI] that a column in a code list document may use to identify a column as being a well-known column. A [Genericode code list document] will use this URI as a CanonicalUri value to indicate that a column is a well-known column.
 
-      *  The column name is a string that may be used by a column in a code list document to identify the column as a well-known column. A [CSV code list document] will use this name as a column name to indicate that a column is a well-known column. In addition, the column name is used in code list bindings to refer to a well-known column. A binding will use the column name "range" to match into a range of values. A binding that doesn't specify a column name will default to column name "code", which refers to a code value in a code list, as defined by each class of code list document.
+      *  The column name is a string that may be used by a column in a code list document to identify the column as a well-known column. A [CSV code list document] will use this name as a [column name] to indicate that a column is a well-known column.
+
+   In addition to well-known columns, this specification defines well-known column references. A well-known column reference is used in [code list bindings]. The well-known column references defined by this specification are:
+
+      *  "#code": A binding will use the column name "#code" to refer to a default code value in a code list. Each class of [code list document] defines how a reference to "#code" is resolved (q.v. Rule 5-5, CSV file as a code list document, above, and Rule 6-6, Genericode file as a code list document, above). A binding that doesn't specify a column name will default to column name "#code".
+
+      *  "#range": A binding will use the column name "#range" to match into a range of values, as described by Section 7.4, Columns supporting ranges of values, below. 
 
 7.1. Column: "code"
 
@@ -1126,7 +1132,7 @@ Rule 6-6. Genericode file as a code list document
 
       337.5|360|north
 
-   A code list binding that refers to range columns uses the [column name] "range". For example, Figure 7-1, Instance referencing range columns, below, uses a run-time binding. It identifies the code list with attribute cli:codeListURI. It refers to range columns with attribute cli:codeListColumnName set to "range".
+   A code list binding that refers to range columns uses the [column name] "#range". For example, Figure 7-1, Instance referencing range columns, below, uses a run-time binding. It identifies the code list with attribute cli:codeListURI. It refers to range columns with attribute cli:codeListColumnName set to "#range".
 
    Figure 7-1: Instance referencing range columns
 
@@ -1138,7 +1144,7 @@ Rule 6-6. Genericode file as a code list document
         <m:PositionHeadingMeasure>
           <ext:DegreeAngleValue
              cli:codeListURI="http://example.org/code-lists/example/directions/code-list/1"
-             cli:codeListColumnName="range">122.31</ext:DegreeAngleValue>
+             cli:codeListColumnName="#range">122.31</ext:DegreeAngleValue>
           <m:AngleUnitText>deg</m:AngleUnitText>
         </m:PositionHeadingMeasure>
       </m:Position>
@@ -1177,14 +1183,6 @@ Rule 6-6. Genericode file as a code list document
    [Column identifier]: http://reference.niem.gov/niem/specification/code-lists/1.0/column/maximum-exclusive
 
    Description: A value that is an [exclusive upper bound] of a range.
-
-7.4.5. Column: "range"
-
-   [Column name]: range
-
-   [Column identifier]: http://reference.niem.gov/niem/specification/code-lists/1.0/column/range
-
-   Description: A value that acts as an index into a code list that uses range columns.
 
 Appendix A. References
 
@@ -1321,7 +1319,7 @@ Appendix C. XML Schema document for the code list schema appinfo namespace
                    <xs:documentation>A qualified name of an XML element.</xs:documentation>
                  </xs:annotation>
                </xs:attribute>
-               <xs:attribute name="columnName" type="xs:string" use="required">
+               <xs:attribute name="columnName" type="xs:string" use="optional">
                  <xs:annotation>
                    <xs:documentation>A local name for a code list column within a code list.</xs:documentation>
                  </xs:annotation>
