@@ -674,17 +674,23 @@ Rule 4-2. Code list URI is an absolute URI
 
       The [normalized value] of an [attribute] cli:codeListURI MUST be an [absolute URI].
 
-Rule 4-3. Column identifier must be accompanied by code list identifier
+Rule 4-3. Column identifier accompanied by code list identifier
 
    [Rule 4-3] (INS)
 
       An [element] having an attribute cli:codeListColumnName MUST have an attribute cli:codeListURI.
 
-4.4.2. Run-time effective code list binding
-
-Rule 4-4. Effective run-time binding.
+Rule 4-4. Constraining indicator accompanied by code list identifier
 
    [Rule 4-4] (INS)
+
+      An [element] having an attribute cli:codeListConstrainingIndicator MUST have an attribute cli:codeListURI.
+
+4.4.2. Run-time effective code list binding
+
+Rule 4-5. Effective run-time binding.
+
+   [Rule 4-5] (INS)
 
       An element $element with an attribute $attribute cli:codeListURI denotes a code list binding of:
 
@@ -704,27 +710,27 @@ Rule 4-4. Effective run-time binding.
 
 4.5.1. Syntax for schema-time code list binding
 
-Rule 4-5. Content in the "clsa" namespace conforms to schema
-
-   [Rule 4-5] (XSD)
-
-      Any XML content in the namespace http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-schema-appinfo/ MUST be [schema-valid] to the XML Schema definitions contained in the schema document in Appendix C, XML Schema document for the code list schema appinfo namespace.
-
-Rule 4-6. Elements are xs:appinfo annotations
+Rule 4-6. Content in the "clsa" namespace conforms to schema
 
    [Rule 4-6] (XSD)
 
-      An element clsa:SimpleCodeListBinding or clsa:ComplexCodeListBinding MUST have [parent] element xs:appinfo.
+      Any XML content in the namespace http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-schema-appinfo/ MUST be [schema-valid] to the XML Schema definitions contained in the schema document in Appendix C, XML Schema document for the code list schema appinfo namespace.
 
-Rule 4-7. Code list URI is absolute URI
+Rule 4-7. Elements are xs:appinfo annotations
 
    [Rule 4-7] (XSD)
 
-      An attribute codeListURI that has [owner element] of clsa:SimpleCodeListBinding or clsa:ComplexCodeListBinding MUST have a [normalized value] that is an [absolute URI].
+      An element clsa:SimpleCodeListBinding or clsa:ComplexCodeListBinding MUST have [parent] element xs:appinfo.
 
-Rule 4-8. Simple code list binding to schema components
+Rule 4-8. Code list URI is absolute URI
 
    [Rule 4-8] (XSD)
+
+      An attribute codeListURI that has [owner element] of clsa:SimpleCodeListBinding or clsa:ComplexCodeListBinding MUST have a [normalized value] that is an [absolute URI].
+
+Rule 4-9. Simple code list binding to schema components
+
+   [Rule 4-9] (XSD)
 
       Element clsa:SimpleCodeListBinding MUST be [application information] on one of:
 
@@ -736,9 +742,9 @@ Rule 4-8. Simple code list binding to schema components
 
          *  element xs:complexType that defines a global [complex type definition]
 
-Rule 4-9. Complex code list binding to schema components
+Rule 4-10. Complex code list binding to schema components
 
-   [Rule 4-9] (XSD)
+   [Rule 4-10] (XSD)
 
       Element clsa:ComplexCodeListBinding MUST be [application information] on one of:
 
@@ -748,9 +754,9 @@ Rule 4-9. Complex code list binding to schema components
 
 4.5.2. Simple binding of schema components
 
-Rule 4-10. Attribute declaration effective simple binding
+Rule 4-11. Attribute declaration effective simple binding
 
-   [Rule 4-10] (VSET)
+   [Rule 4-11] (VSET)
 
       An element xs:attribute defining an [attribute declaration] $attribute-declaration with [application information] of an element $binding-element clsa:SimpleCodeListBinding entails:
 
@@ -766,9 +772,9 @@ Rule 4-10. Attribute declaration effective simple binding
 
                *  A value for constraining that is: if $binding-element has attribute constrainingIndicator, then its value, otherwise true.
 
-Rule 4-11. Element declaration effective simple binding
+Rule 4-12. Element declaration effective simple binding
 
-   [Rule 4-11] (VSET)
+   [Rule 4-12] (VSET)
 
       An element xs:element defining an [element declaration] $element-declaration with [application information] of an element $binding-element clsa:SimpleCodeListBinding entails:
 
@@ -784,9 +790,9 @@ Rule 4-11. Element declaration effective simple binding
 
                *  A value for constraining that is: if $binding-element has attribute constrainingIndicator, then its value, otherwise true.
 
-Rule 4-12. Type definition effective simple binding
+Rule 4-13. Type definition effective simple binding
 
-   [Rule 4-12] (VSET)
+   [Rule 4-13] (VSET)
 
       An element xs:simpleType or xs:complexType defining a [type definition] $type-definition with [application information] of an element $binding-element clsa:SimpleCodeListBinding entails:
 
@@ -816,9 +822,9 @@ Rule 4-12. Type definition effective simple binding
 
 4.5.3. Complex binding of schema components
 
-Rule 4-13. Element declaration effective complex binding
+Rule 4-14. Element declaration effective complex binding
 
-   [Rule 4-13] (VSET)
+   [Rule 4-14] (VSET)
 
       An element xs:element defining an [element declaration] $element-declaration with [application information] of an element $binding-element clsa:ComplexCodeListBinding entails:
 
@@ -836,9 +842,9 @@ Rule 4-13. Element declaration effective complex binding
 
                *  A value for constraining that is: if $binding-element has attribute constrainingIndicator, then its value, otherwise true.
 
-Rule 4-14. Complex type definition effective complex binding
+Rule 4-15. Complex type definition effective complex binding
 
-   [Rule 4-14] (VSET)
+   [Rule 4-15] (VSET)
 
       An element xs:complexType defining a [complex type definition] $type-definition with [application information] of an element $binding-element clsa:ComplexCodeListBinding entails:
 
@@ -860,9 +866,9 @@ Rule 4-14. Complex type definition effective complex binding
 
    A [code list binding] defined against a code list document may be matched to zero or more [distinct entries] within the code list. The process of finding matches for a code list binding $binding against a [code list validation set] is defined by the following rule.
 
-Rule 4-15. Matches and validity for a code list binding
+Rule 4-16. Matches and validity for a code list binding
 
-   [Rule 4-15] (VSET)
+   [Rule 4-16] (VSET)
 
       A [code list binding] matching against against a [code list validation set] yields a set of [distinct entries] and a validity value (valid or invalid).
 
@@ -904,13 +910,13 @@ Rule 4-15. Matches and validity for a code list binding
 
    A code list binding that is used to connect a value to a service or other code list methodology that does not use [code list documents] will result in invalid matches. This is as designed; matches for services or other methodologies should be determined by a method other than this rule.
 
-Rule 4-16. Value comparisons based on types
+Rule 4-17. Value comparisons based on types
 
-   Rule 4-15, Matches and validity for a code list binding, above, requires values from an XML document to be compared to values from code lists. Whether values match, and how they compare, is dependent on what kind of data those values are. For example, text values and string values are compared using different methods. This rule establishes that typing of comparisons is based on the types of the values.
+   Rule 4-16, Matches and validity for a code list binding, above, requires values from an XML document to be compared to values from code lists. Whether values match, and how they compare, is dependent on what kind of data those values are. For example, text values and string values are compared using different methods. This rule establishes that typing of comparisons is based on the types of the values.
 
    [XPathFunctions] Section 17, Casting provides a set of rules for type casting among XML Schema primitive types.
 
-   [Rule 4-16] (VSET)
+   [Rule 4-17] (VSET)
 
       Comparisons between a value $instance-value of a column/value pair and a code value $code-value MUST be conducted as follows:
 
@@ -932,11 +938,11 @@ Rule 4-16. Value comparisons based on types
 
          6. Inequality comparisons (e.g., less than, greater than) for ranges are conducted as appropriate for lowest atomic base type of $comparison-data-type.
 
-Rule 4-17. Code list identified by candidate code list identifiers
+Rule 4-18. Code list identified by candidate code list identifiers
 
    Each class of code list document specifies how its instances define code list identifiers that may refer to a code list. This rule ensures that code lists are referred to via the correct code list identifier, when it is defined.
 
-   [Rule 4-17] (VSET)
+   [Rule 4-18] (VSET)
 
       When a [code list document] defines candidate [code list identifiers], a [code list identifier] against which a [code list document] [resource] is [resolved] MUST be a candidate code list identifier for that code list document.
 
@@ -1844,21 +1850,22 @@ Appendix G. Index of rules
    Rule 3-2, Document with conformance target is a code list-enabled schema document: Section 3.4, Code list-enabled schema document
    Rule 4-1, Content in the "cli" namespace conforms to schema: Section 4.4.1, Syntax for run-time code list binding
    Rule 4-2, Code list URI is an absolute URI: Section 4.4.1, Syntax for run-time code list binding
-   Rule 4-3, Column identifier must be accompanied by code list identifier: Section 4.4.1, Syntax for run-time code list binding
-   Rule 4-4, Effective run-time binding.: Section 4.4.2, Run-time effective code list binding
-   Rule 4-5, Content in the "clsa" namespace conforms to schema: Section 4.5.1, Syntax for schema-time code list binding
-   Rule 4-6, Elements are xs:appinfo annotations: Section 4.5.1, Syntax for schema-time code list binding
-   Rule 4-7, Code list URI is absolute URI: Section 4.5.1, Syntax for schema-time code list binding
-   Rule 4-8, Simple code list binding to schema components: Section 4.5.1, Syntax for schema-time code list binding
-   Rule 4-9, Complex code list binding to schema components: Section 4.5.1, Syntax for schema-time code list binding
-   Rule 4-10, Attribute declaration effective simple binding: Section 4.5.2, Simple binding of schema components
-   Rule 4-11, Element declaration effective simple binding: Section 4.5.2, Simple binding of schema components
-   Rule 4-12, Type definition effective simple binding: Section 4.5.2, Simple binding of schema components
-   Rule 4-13, Element declaration effective complex binding: Section 4.5.3, Complex binding of schema components
-   Rule 4-14, Complex type definition effective complex binding: Section 4.5.3, Complex binding of schema components
-   Rule 4-15, Matches and validity for a code list binding: Section 4.6, Matches for code list bindings
-   Rule 4-16, Value comparisons based on types: Section 4.6, Matches for code list bindings
-   Rule 4-17, Code list identified by candidate code list identifiers: Section 4.6, Matches for code list bindings
+   Rule 4-3, Column identifier accompanied by code list identifier: Section 4.4.1, Syntax for run-time code list binding
+   Rule 4-4, Constraining indicator accompanied by code list identifier: Section 4.4.1, Syntax for run-time code list binding
+   Rule 4-5, Effective run-time binding.: Section 4.4.2, Run-time effective code list binding
+   Rule 4-6, Content in the "clsa" namespace conforms to schema: Section 4.5.1, Syntax for schema-time code list binding
+   Rule 4-7, Elements are xs:appinfo annotations: Section 4.5.1, Syntax for schema-time code list binding
+   Rule 4-8, Code list URI is absolute URI: Section 4.5.1, Syntax for schema-time code list binding
+   Rule 4-9, Simple code list binding to schema components: Section 4.5.1, Syntax for schema-time code list binding
+   Rule 4-10, Complex code list binding to schema components: Section 4.5.1, Syntax for schema-time code list binding
+   Rule 4-11, Attribute declaration effective simple binding: Section 4.5.2, Simple binding of schema components
+   Rule 4-12, Element declaration effective simple binding: Section 4.5.2, Simple binding of schema components
+   Rule 4-13, Type definition effective simple binding: Section 4.5.2, Simple binding of schema components
+   Rule 4-14, Element declaration effective complex binding: Section 4.5.3, Complex binding of schema components
+   Rule 4-15, Complex type definition effective complex binding: Section 4.5.3, Complex binding of schema components
+   Rule 4-16, Matches and validity for a code list binding: Section 4.6, Matches for code list bindings
+   Rule 4-17, Value comparisons based on types: Section 4.6, Matches for code list bindings
+   Rule 4-18, Code list identified by candidate code list identifiers: Section 4.6, Matches for code list bindings
    Rule 5-1, CSV code list document is a CSV file: Section 5, Comma-separated values (CSV) code lists
    Rule 5-2, CSV code list document has header: Section 5, Comma-separated values (CSV) code lists
    Rule 5-3, CSV column name is not empty: Section 5, Comma-separated values (CSV) code lists
