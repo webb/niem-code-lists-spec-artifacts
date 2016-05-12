@@ -100,7 +100,7 @@ Table of Tables
 
 1.2. Machine-readable format for a code list
 
-   This specification provides for representing code lists using CSV files and Genericode files. The code list in Table Table 1-1, Example code list: vehicle makes and models, above, may be represented as a Genericode document, as shown in Appendix D.3, Make-Model code list Genericode file, below.
+   This specification provides for representing code lists using CSV files and Genericode files. The code list in Table Table 1-1, Example code list: vehicle makes and models, above, may be represented as a CSV or Genericode document, as shown in Appendix D.2, Make-Model code list CSV file, below, and Appendix D.3, Make-Model code list Genericode file, below.
 
    This specification provides for the use of CSV files and Genericode files as code lists. It also provides a framework for code lists that may be implemented using other formats. The syntax of code list bindings and code list use in instance documents may leverage formats other than CSV and Genericode. Future specifications may identify how other formats satisfy the code list framework defined by this document. 
 
@@ -858,7 +858,7 @@ Rule 4-14. Complex type definition effective complex binding
 
 4.6. Matches for code list bindings
 
-   A [code list binding] defined against a code list document may be matched to zero or more [distinct entries] within the code list. The process of finding matches for a code list binding $binding against a [code list validation set] is defined by the following rule:
+   A [code list binding] defined against a code list document may be matched to zero or more [distinct entries] within the code list. The process of finding matches for a code list binding $binding against a [code list validation set] is defined by the following rule.
 
 Rule 4-15. Matches and validity for a code list binding
 
@@ -872,7 +872,7 @@ Rule 4-15. Matches and validity for a code list binding
 
          *  Using the [entity catalog] defined for the [code list validation set], [resolve] [code list identifier] $identifier to a [locally-resolved resource] $resource.
 
-         *  If $resource is not a [code list document], or if no resource is identified for $identifier, then this specification does not define any matches for $binding. The binding is evaluated to be valid. In this case, the code list identified by $identifier SHOULD be handled by means other than this specification.
+         *  If $resource is not a [code list document], or if no resource is identified for $identifier, then this specification does not define any matches for $binding. The binding is evaluated to be invalid. In this case, the code list identified by $identifier SHOULD be handled by means other than this specification.
 
          *  If $resource is a [code list document], then the set of matches for $binding is the list of distinct entries in the code list for which every column referenced by $binding has the corresponding value.
 
@@ -901,6 +901,8 @@ Rule 4-15. Matches and validity for a code list binding
          *  If the binding has one or more matches, then it is valid.
 
    The above rule specifies that code list identifiers are to be resolved to [locally-resolved resources], which are in the [local context] of the entity catalog. This specification does not specify that code list identifiers should be resolved by network fetches of code list resources. Code list identifiers are meant to be treated as identifiers, as names, and not as network locations of resources.
+
+   A code list binding that is used to connect a value to a service or other code list methodology that does not use [code list documents] will result in invalid matches. This is as designed; matches for services or other methodologies should be determined by a method other than this rule.
 
 Rule 4-16. Value comparisons based on types
 
