@@ -2,7 +2,7 @@ NIEM Code Lists Specification
 
 Version 1.0beta2
 
-May 11, 2016
+May 12, 2016
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -998,7 +998,7 @@ Rule 5-5. CSV file as a code list document
 
                *  the first [column] of the [CSV file].
 
-         7. a [code value] in a [CSV file] has no type; its data type is empty.
+         7. A [code value] in a [CSV file] has no type; its data type is empty.
 
 6. Genericode code lists
 
@@ -1424,6 +1424,7 @@ Appendix D.2. Make-Model code list CSV file
    TOYT,Toyota,CAM,Camry,Auto
    CHEV,Chevrolet,SLV,Silverado,Pickup
    MERZ,Mercedes-Benz,500,500 Series,Auto
+   
 
 Appendix D.3. Make-Model code list Genericode file
 
