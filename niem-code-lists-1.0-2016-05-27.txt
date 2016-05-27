@@ -1,8 +1,8 @@
 NIEM Code Lists Specification
 
-Version 1.0beta2
+Version 1.0
 
-May 12, 2016
+May 27, 2016
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -16,7 +16,7 @@ Abstract
 
 Document Status
 
-   This document is a beta version draft product of the NIEM Technical Architecture Committee (NTAC). This version of this document is not normative. The release version of this document will be normative when approved by the NTAC.
+   This document is a specification product of the NIEM Technical Architecture Committee (NTAC). This version of this document is normative for the conformance targets it defines.
 
    Please submit any comments on this specification. You can send email to niem-comments@lists.gatech.edu, or submit an issue at https://github.com/NIEM/niem-code-lists-spec/issues.
 
