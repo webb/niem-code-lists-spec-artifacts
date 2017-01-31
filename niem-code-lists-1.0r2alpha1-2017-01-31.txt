@@ -1,8 +1,8 @@
 NIEM Code Lists Specification
 
-Version 1.0
+Version 1.0r2alpha1
 
-June 20, 2016
+January 31, 2017
 
 NIEM Technical Architecture Committee (NTAC)
 
@@ -300,7 +300,7 @@ Table of Tables
 
       *  ct ("conformance targets"): The namespace defined by [CTAS] for the ct:conformanceTargets attribute: "http://release.niem.gov/niem/conformanceTargets/3.0/".
 
-      *  cli ("code list instance"): Defined by this specification, the code list instance namespace defines attributes that connect XML element content to code lists at run time: "http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/". The XML schema document defining this namespace is provided in Appendix B, XML Schema document for the code list instance namespace, below.
+      *  cli ("code list instance"): Defined by this specification, the code list instance namespace defines attributes that connect XML element content to code lists at run time: "http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/". The XML schema document defining this namespace is provided in Appendix B.1, XML Schema document for NIEM 3, below.
 
       *  clsa ("code list schema appinfo"): Defined by this specification, the code list schema appinfo namespace defines an XML vocabulary for use in xs:appinfo on XML Schema component definitions, which connect XML element and attribute content to code lists: "http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-schema-appinfo/". The XML schema document defining this namespace is provided in Appendix C, XML Schema document for the code list schema appinfo namespace, below.
 
@@ -658,7 +658,7 @@ Rule 3-2. Document with conformance target is a code list-enabled schema documen
 
 4.4. Run-time binding
 
-   This document provides an XML Schema document for run-time binding of XML content to code lists. This schema is provided in Appendix B, XML Schema document for the code list instance namespace, below.
+   This document provides an XML Schema document for run-time binding of XML content to code lists. This schema is provided in Appendix B.1, XML Schema document for NIEM 3, below.
 
 4.4.1. Syntax for run-time code list binding
 
@@ -666,7 +666,7 @@ Rule 4-1. Content in the "cli" namespace conforms to schema
 
    [Rule 4-1] (INS)
 
-      Any XML content in the namespace http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/ MUST be [schema-valid] to the XML Schema definitions contained in the schema document in Appendix B, XML Schema document for the code list instance namespace.
+      Any XML content in the namespace http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/ MUST be [schema-valid] to the XML Schema definitions contained in the schema document in Appendix B.1, XML Schema document for NIEM 3.
 
 Rule 4-2. Code list URI is an absolute URI
 
@@ -1220,15 +1220,19 @@ Appendix A. References
 
    [XMLSchema2]: Biron, Paul V., and Ashok Malhotra. "XML Schema Part 2: Datatypes Second Edition," October 28, 2004. http://www.w3.org/TR/2004/REC-xmlschema-2-20041028/.
 
-Appendix B. XML Schema document for the code list instance namespace
+Appendix B. XML Schema documents for the code list instance namespace
 
-   The following XML Schema document defines the [code list instance namespace], a namespace for binding the content of XML documents to code lists at run time. This vocabulary is incorporated into exchange specifications, and appears in exchanged XML documents to express code list bindings at run time.
+   The following XML Schema documents define the [code list instance namespace], a namespace for binding the content of XML documents to code lists at run time. This vocabulary is incorporated into exchange specifications, and appears in exchanged XML documents to express code list bindings at run time. There are two versions provided: one for NIEM 3 and one for NIEM 4.
+
+Appendix B.1. XML Schema document for NIEM 3
+
+   The following schema document conforms to NIEM 3, and may be integrated into NIEM 3-conformant schema sets.
 
    <?xml version="1.0" encoding="US-ASCII"?>
    <xs:schema
        ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/3.0/#ReferenceSchemaDocument"
        targetNamespace="http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/"
-       version="1"
+       version="1.0r2alpha1-niem3"
        xmlns:appinfo="http://release.niem.gov/niem/appinfo/3.0/"
        xmlns:cli="http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/"
        xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
@@ -1240,6 +1244,62 @@ Appendix B. XML Schema document for the code list instance namespace
      </xs:annotation>
    
      <xs:import namespace="http://release.niem.gov/niem/structures/3.0/"/>
+   
+     <xs:attribute name="codeListURI" type="xs:anyURI">
+       <xs:annotation>
+         <xs:documentation>A universal identifier for a code list.</xs:documentation>
+       </xs:annotation>
+     </xs:attribute>
+   
+     <xs:attribute name="codeListColumnName" type="xs:string">
+       <xs:annotation>
+         <xs:documentation>A local name for a code list column within a code list.</xs:documentation>
+       </xs:annotation>
+     </xs:attribute>
+   
+     <xs:attribute name="codeListConstrainingIndicator" type="xs:boolean">
+       <xs:annotation>
+         <xs:documentation>True when a code list binding constrains the validity of a code list value, false otherwise.</xs:documentation>
+       </xs:annotation>
+     </xs:attribute>
+   
+     <xs:complexType name="CodeType">
+       <xs:annotation>
+         <xs:documentation>A datatype for a code with codes sourced from an external code list.</xs:documentation>
+       </xs:annotation>
+       <xs:simpleContent>
+         <xs:extension base="xs:token">
+           <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+           <xs:attribute ref="cli:codeListURI" use="required"/>
+           <xs:attribute ref="cli:codeListColumnName" use="optional"/>
+           <xs:attribute ref="cli:codeListConstrainingIndicator" use="optional"/>
+         </xs:extension>
+       </xs:simpleContent>
+     </xs:complexType>
+   
+   </xs:schema>
+   
+
+Appendix B.2. XML Schema document for NIEM 4
+
+   The following schema document conforms to NIEM 4, and may be integrated into NIEM 4-conformant schema sets.
+
+   <?xml version="1.0" encoding="US-ASCII"?>
+   <xs:schema
+       ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/#ReferenceSchemaDocument"
+       targetNamespace="http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/"
+       version="1.0r2alpha1-niem4"
+       xmlns:appinfo="http://release.niem.gov/niem/appinfo/4.0/"
+       xmlns:cli="http://reference.niem.gov/niem/specification/code-lists/1.0/code-lists-instance/"
+       xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
+       xmlns:structures="http://release.niem.gov/niem/structures/4.0/"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   
+     <xs:annotation>
+       <xs:documentation>Definitions for the use of the NIEM Code Lists Specification, version 1.0, in XML message instances.</xs:documentation>
+     </xs:annotation>
+   
+     <xs:import namespace="http://release.niem.gov/niem/structures/4.0/"/>
    
      <xs:attribute name="codeListURI" type="xs:anyURI">
        <xs:annotation>
@@ -1424,7 +1484,6 @@ Appendix D.2. Make-Model code list CSV file
    TOYT,Toyota,CAM,Camry,Auto
    CHEV,Chevrolet,SLV,Silverado,Pickup
    MERZ,Mercedes-Benz,500,500 Series,Auto
-   
 
 Appendix D.3. Make-Model code list Genericode file
 
